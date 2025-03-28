@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Query
 from typing import List, Dict, Optional
 import asyncio
-from clickhouse_client import TextToSQLClient  # Assuming paste.txt is named paste.py
+from api.clickhouse_client import TextToSQLClient  
 import json
 
 app = FastAPI()

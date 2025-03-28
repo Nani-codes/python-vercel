@@ -10,18 +10,19 @@ from concurrent.futures import ThreadPoolExecutor
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class TextToSQLClient:
     def __init__(self):
-        self.client = OpenAI(api_key=OPENAI_API_KEY)
+        self.client = OpenAI(
+    api_key=os.environ.get("OPENAI_API_KEY"),
+)
         self.server_params = StdioServerParameters(
             command="python",
-            args=["clickhouse_server.py"],
+            args=["api/clickhouse_server.py"],
             env=None,
         )
         # Load prompts from YAML file
-        with open("prompts_clickhouse.yaml", "r") as file:
+        with open("api/prompts_clickhouse.yaml", "r") as file:
             self.prompts = yaml.safe_load(file)
     
     async def list_tables(self):
